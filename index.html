@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data House — Zbavíme vás práce s dátami</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #141414;
+      --border: #222;
+      --accent: #c8f060;
+      --accent2: #60d4f0;
+      --text: #f0ede8;
+      --muted: #6b6b6b;
+      --ff-head: 'Syne', sans-serif;
+      --ff-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--ff-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2.5rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(12px);
+      border-color: var(--border);
+    }
+    .nav-logo {
+      font-family: var(--ff-head);
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-cta {
+      font-family: var(--ff-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 0.5rem 1.25rem;
+      border-radius: 2px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 8rem 2.5rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200,240,96,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,240,96,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(200,240,96,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-family: var(--ff-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.2s forwards;
+    }
+
+    .hero h1 {
+      font-family: var(--ff-head);
+      font-weight: 800;
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      max-width: 14ch;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.35s forwards;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: #a8a49e;
+      max-width: 44ch;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.5s forwards;
+    }
+
+    .hero-actions {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.65s forwards;
+    }
+
+    .btn-primary {
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 0.85rem 2rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-ghost {
+      font-family: var(--ff-head);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      color: var(--text);
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 0.85rem 2rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--muted); transform: translateY(-1px); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      right: 2.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      opacity: 0;
+      animation: fadeIn 1s 1.2s forwards;
+    }
+    .hero-scroll::before {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, transparent, var(--muted));
+    }
+
+    /* STRIP */
+    .strip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .strip-inner {
+      display: flex;
+      gap: 3rem;
+      white-space: nowrap;
+      animation: marquee 20s linear infinite;
+    }
+    .strip-item {
+      font-family: var(--ff-head);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+    .strip-item span { color: var(--accent); margin-right: 3rem; }
+
+    /* SECTIONS */
+    section { position: relative; z-index: 1; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    /* ABOUT */
+    .about {
+      padding: 7rem 0;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about h2 {
+      font-family: var(--ff-head);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+    }
+    .about h2 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .about-text {
+      padding-top: 0.5rem;
+    }
+    .about-text p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: #a8a49e;
+      margin-bottom: 1.25rem;
+      line-height: 1.75;
+    }
+    .about-text p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+    .about-stat {
+      display: flex;
+      gap: 3rem;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: var(--ff-head);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    /* SERVICES */
+    .services {
+      padding: 7rem 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .services-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+      align-items: end;
+    }
+    .services h2 {
+      font-family: var(--ff-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+    }
+    .services-intro {
+      font-size: 1rem;
+      font-weight: 300;
+      color: #a8a49e;
+      line-height: 1.75;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .service-card {
+      background: var(--surface);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .service-card:hover { background: #1a1a1a; }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-num {
+      font-family: var(--ff-head);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .service-card h3 {
+      font-family: var(--ff-head);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .service-card p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: #a8a49e;
+      line-height: 1.7;
+    }
+
+    /* HOW */
+    .how {
+      padding: 7rem 0;
+    }
+    .how h2 {
+      font-family: var(--ff-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 4rem;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .step {
+      padding: 2.5rem 2rem 2.5rem 0;
+      border-right: 1px solid var(--border);
+      padding-right: 2rem;
+      padding-left: 0;
+    }
+    .step:last-child { border-right: none; padding-right: 0; padding-left: 2rem; }
+    .step:not(:first-child) { padding-left: 2rem; }
+    .step-num {
+      font-family: var(--ff-head);
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .step h3 {
+      font-family: var(--ff-head);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    .step p {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: #a8a49e;
+      line-height: 1.7;
+    }
+
+    /* WHO */
+    .who {
+      padding: 7rem 0;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .who-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .who h2 {
+      font-family: var(--ff-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+    .who h2 em { font-style: normal; color: var(--accent); }
+    .who p {
+      font-size: 1rem;
+      font-weight: 300;
+      color: #a8a49e;
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+    .who-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .who-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: #a8a49e;
+      line-height: 1.6;
+    }
+    .who-list li::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+      font-weight: 600;
+      margin-top: 0.05em;
+    }
+
+    /* CTA */
+    .cta-section {
+      padding: 8rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-glow {
+      position: absolute;
+      bottom: -30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(200,240,96,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-family: var(--ff-head);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .cta-section h2 em { font-style: normal; color: var(--accent); }
+    .cta-section p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: #a8a49e;
+      max-width: 42ch;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    .cta-email {
+      font-family: var(--ff-head);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(200,240,96,0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+    .cta-email:hover { border-color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-logo {
+      font-family: var(--ff-head);
+      font-weight: 800;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+      color: var(--muted);
+    }
+    .footer-logo span { color: var(--accent); }
+    footer p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.25rem; }
+      .hero { padding: 7rem 1.25rem 4rem; }
+      .container { padding: 0 1.25rem; }
+      .about-grid,
+      .services-head,
+      .who-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .step, .step:last-child, .step:not(:first-child) {
+        border-right: none;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .about, .services, .how, .who, .cta-section { padding: 4rem 0; }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="#" class="nav-logo">Data<span>House</span></a>
+    <a href="#kontakt" class="nav-cta">Napíšte nám</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-glow"></div>
+    <div class="container" style="position:relative;z-index:1;">
+      <p class="hero-label">Dátové poradenstvo — SK / CZ</p>
+      <h1>Zbavíme vás <em>práce s dátami.</em></h1>
+      <p class="hero-sub">Automatizácia reportov, čistenie dát, prehľad nad biznisom — postaráme sa o to, aby ste sa mohli venovať tomu, čo je skutočne dôležité.</p>
+      <div class="hero-actions">
+        <a href="#kontakt" class="btn-primary">Nezáväzná konzultácia</a>
+        <a href="#sluzby" class="btn-ghost">Čo robíme</a>
+      </div>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="strip-inner">
+      <span class="strip-item"><span>✦</span> Power BI & Dashboardy</span>
+      <span class="strip-item"><span>✦</span> Automatizácia procesov</span>
+      <span class="strip-item"><span>✦</span> Dátové pipelines</span>
+      <span class="strip-item"><span>✦</span> Analýza a čistenie dát</span>
+      <span class="strip-item"><span>✦</span> E-commerce analytika</span>
+      <span class="strip-item"><span>✦</span> SQL & Python</span>
+      <span class="strip-item"><span>✦</span> Power BI & Dashboardy</span>
+      <span class="strip-item"><span>✦</span> Automatizácia procesov</span>
+      <span class="strip-item"><span>✦</span> Dátové pipelines</span>
+      <span class="strip-item"><span>✦</span> Analýza a čistenie dát</span>
+      <span class="strip-item"><span>✦</span> E-commerce analytika</span>
+      <span class="strip-item"><span>✦</span> SQL & Python</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="container">
+      <div class="about-grid reveal">
+        <div>
+          <p class="section-label">O nás</p>
+          <h2>Senior konzultant. <em>Žiadna agentúrna rétorika.</em></h2>
+          <div class="about-stat">
+            <div class="stat-item">
+              <div class="stat-num">8+</div>
+              <div class="stat-label">rokov v e-commerce</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">6</div>
+              <div class="stat-label">krajín operácií</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">SK/CZ</div>
+              <div class="stat-label">trh</div>
+            </div>
+          </div>
+        </div>
+        <div class="about-text">
+          <p>Data House vedie <strong>Tadeáš Galbavy</strong>, senior dátový konzultant s viac ako 8 rokmi skúseností v e-commerce a logistike naprieč 6 krajinami.</p>
+          <p>Nie sme veľká agentúra s juniormi, ktorí sa učia na vašom projekte. <strong>Na každom projekte pracujem osobne</strong> — od prvého hovoru až po finálne riešenie.</p>
+          <p>Špecializujeme sa na firmy, kde dáta existujú, ale nie sú využité. Poznáme tento problém zvnútra — a vieme ho vyriešiť rýchlo a bez zbytočnej teórie.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="sluzby">
+    <div class="container">
+      <div class="services-head reveal">
+        <div>
+          <p class="section-label">Služby</p>
+          <h2>Čo pre vás spravíme</h2>
+        </div>
+        <p class="services-intro">Každý projekt začína auditom aktuálneho stavu. Nenavrhujeme riešenia naslepo — najprv pochopíme váš biznis.</p>
+      </div>
+      <div class="services-grid reveal">
+        <div class="service-card">
+          <p class="service-num">01</p>
+          <h3>Audit & zdravie dát</h3>
+          <p>Pozrieme sa na vaše dáta a povieme vám pravdu — kde sú chyby, kde sú medzery a kde unikajú peniaze. Bez prikrášľovania.</p>
+        </div>
+        <div class="service-card">
+          <p class="service-num">02</p>
+          <h3>Automatizácia reportov</h3>
+          <p>Manuálne reporty v Exceli každý pondelok ráno? To sa dá vyriešiť. Nastavíme automatický tok dát — vy len otvoríte dashboard.</p>
+        </div>
+        <div class="service-card">
+          <p class="service-num">03</p>
+          <h3>Power BI dashboardy</h3>
+          <p>Prehľad nad biznisom v reálnom čase. Marže, skladové pohyby, výkonnosť kanálov — všetko na jednom mieste.</p>
+        </div>
+        <div class="service-card">
+          <p class="service-num">04</p>
+          <h3>Dátové pipelines & ETL</h3>
+          <p>Spájame dáta z rôznych zdrojov — e-shop, ERP, sklad, reklamy. Čisté dáta na jednom mieste, pripravené na analýzu.</p>
+        </div>
+        <div class="service-card">
+          <p class="service-num">05</p>
+          <h3>Procesná automatizácia</h3>
+          <p>Identifikujeme manuálnu prácu vo vašich procesoch a nahradíme ju. Python, Power Automate, API integrácie — čo situácia vyžaduje.</p>
+        </div>
+        <div class="service-card">
+          <p class="service-num">06</p>
+          <h3>Ad-hoc analýzy</h3>
+          <p>Potrebujete rýchlu odpoveď na konkrétnu otázku? Dodáme analýzu s jasným záverom — nie tabuľku s číslami, ale rozhodnutie.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="how">
+    <div class="container">
+      <p class="section-label reveal">Ako pracujeme</p>
+      <h2 class="reveal">Jednoduchý proces.<br>Žiadne prekvapenia.</h2>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Úvodný hovor</h3>
+          <p>30 minút zdarma. Pochopíme váš problém a zistíme, či sme pre vás správna voľba.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Audit situácie</h3>
+          <p>Pozrieme sa na aktuálny stav dát a procesov. Dostanete konkrétny obraz — nie všeobecné odporúčania.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Návrh & realizácia</h3>
+          <p>Navrhneme riešenie, odsúhlasíme rozsah a spravíme ho. Bez zbytočných meetingov a prezentácií.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h3>Odovzdanie & podpora</h3>
+          <p>Odovzdáme riešenie s dokumentáciou. Váš tím ho dokáže udržiavať sám — to je náš cieľ.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section class="who">
+    <div class="container">
+      <div class="who-grid reveal">
+        <div>
+          <p class="section-label">Pre koho</p>
+          <h2>Rastúce firmy, ktoré <em>prestávajú zvládať dáta ručne.</em></h2>
+          <p>Pracujeme predovšetkým s e-commerce a logistickými firmami na SK/CZ trhu, kde sú dáta roztrúsené a reportovanie stojí príliš veľa času.</p>
+        </div>
+        <ul class="who-list">
+          <li>Reporty robíte stále ručne v Exceli a trvá to hodiny</li>
+          <li>Máte dáta v e-shope, ERP aj Exceli — ale nie pohromade</li>
+          <li>Neviete presne ktoré produkty zarábajú a ktoré nie</li>
+          <li>Chceli by ste dashboard, ale nemáte na to interné kapacity</li>
+          <li>Rastie vám firma a doterajší spôsob práce s dátami prestáva stačiť</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="kontakt">
+    <div class="cta-glow"></div>
+    <div class="container" style="position:relative;z-index:1;">
+      <p class="section-label reveal">Kontakt</p>
+      <h2 class="reveal">Začnime <em>rozhovorom.</em></h2>
+      <p class="reveal">Napíšte nám čo riešite — odpovieme do 24 hodín a dohodneme bezplatný úvodný hovor.</p>
+      <a href="mailto:hello@data-house.eu" class="cta-email reveal">hello@data-house.eu</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Data<span>House</span></div>
+    <p>© 2025 Data House · data-house.eu</p>
+  </footer>
+
+  <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
