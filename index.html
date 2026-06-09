@@ -7,26 +7,19 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-  
     gtag('config', 'G-6M3CT442VM');
   </script>
-  
+
   <meta charset="UTF-8" />
   <meta name="description" content="Dátové poradenstvo pre e-commerce a logistiku. Power BI dashboardy, automatizácia reportov, čistenie dát. SK/CZ trh.">
   <meta name="keywords" content="dátový analytik, Power BI, automatizácia, e-commerce analytika, dátové poradenstvo, dashboard, SQL, Python, Slovensko">
   <meta name="author" content="Tadeáš Galbavy - Data House">
-  
-  <!-- Open Graph (pre LinkedIn, Facebook náhľad) -->
-  <meta property="og:title" content="Data House - Zbavíme vás práce s dátami">
+  <meta property="og:title" content="Data House — Zbavíme vás práce s dátami">
   <meta property="og:description" content="Dátové poradenstvo pre rastúce e-commerce firmy. Power BI, automatizácia, analýza dát.">
   <meta property="og:url" content="https://data-house.eu">
   <meta property="og:type" content="website">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta property="og:image" content="https://data-house.eu/datahouse_logo.png">
-  <link rel="canonical" href="https://data-house.eu/" />
-  <link rel="icon" type="image/png" href="datahouse_fav.png">
-
-  <title>Data House - Zbavíme vás práce s dátami</title>
+  <title>Data House — Zbavíme vás práce s dátami</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <style>
@@ -37,7 +30,6 @@
       --surface: #141414;
       --border: #222;
       --accent: #c8f060;
-      --accent2: #60d4f0;
       --text: #f0ede8;
       --muted: #6b6b6b;
       --ff-head: 'Syne', sans-serif;
@@ -55,7 +47,6 @@
       overflow-x: hidden;
     }
 
-    /* NOISE OVERLAY */
     body::before {
       content: '';
       position: fixed;
@@ -92,6 +83,42 @@
       text-decoration: none;
     }
     .nav-logo span { color: var(--accent); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* LANGUAGE SWITCHER */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .lang-btn {
+      font-family: var(--ff-head);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      background: transparent;
+      border: none;
+      padding: 0.4rem 0.75rem;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s;
+    }
+    .lang-btn.active {
+      color: var(--bg);
+      background: var(--accent);
+    }
+    .lang-btn:not(.active):hover {
+      color: var(--text);
+    }
+
     .nav-cta {
       font-family: var(--ff-body);
       font-size: 0.85rem;
@@ -116,7 +143,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .hero-grid-bg {
       position: absolute;
       inset: 0;
@@ -126,7 +152,6 @@
       background-size: 60px 60px;
       mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
     }
-
     .hero-glow {
       position: absolute;
       top: -20%;
@@ -137,7 +162,6 @@
       background: radial-gradient(ellipse, rgba(200,240,96,0.12) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .hero-label {
       font-family: var(--ff-body);
       font-size: 0.75rem;
@@ -149,7 +173,6 @@
       opacity: 0;
       animation: fadeUp 0.6s 0.2s forwards;
     }
-
     .hero h1 {
       font-family: var(--ff-head);
       font-weight: 800;
@@ -160,13 +183,11 @@
       opacity: 0;
       animation: fadeUp 0.7s 0.35s forwards;
     }
-
     .hero h1 em {
       font-style: normal;
       color: var(--accent);
       display: block;
     }
-
     .hero-sub {
       margin-top: 2rem;
       font-size: 1.1rem;
@@ -176,7 +197,6 @@
       opacity: 0;
       animation: fadeUp 0.7s 0.5s forwards;
     }
-
     .hero-actions {
       margin-top: 2.5rem;
       display: flex;
@@ -185,7 +205,6 @@
       opacity: 0;
       animation: fadeUp 0.7s 0.65s forwards;
     }
-
     .btn-primary {
       font-family: var(--ff-head);
       font-weight: 700;
@@ -200,7 +219,6 @@
       display: inline-block;
     }
     .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
-
     .btn-ghost {
       font-family: var(--ff-head);
       font-weight: 600;
@@ -216,7 +234,6 @@
       display: inline-block;
     }
     .btn-ghost:hover { border-color: var(--muted); transform: translateY(-1px); }
-
     .hero-scroll {
       position: absolute;
       bottom: 2rem;
@@ -245,7 +262,6 @@
       border-bottom: 1px solid var(--border);
       padding: 1rem 0;
       overflow: hidden;
-      position: relative;
     }
     .strip-inner {
       display: flex;
@@ -266,13 +282,7 @@
 
     /* SECTIONS */
     section { position: relative; z-index: 1; }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 2.5rem;
-    }
-
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; }
     .section-label {
       font-size: 0.7rem;
       font-weight: 600;
@@ -283,15 +293,8 @@
     }
 
     /* ABOUT */
-    .about {
-      padding: 7rem 0;
-    }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
+    .about { padding: 7rem 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
     .about h2 {
       font-family: var(--ff-head);
       font-size: clamp(2rem, 4vw, 3.2rem);
@@ -299,13 +302,7 @@
       line-height: 1.05;
       letter-spacing: -0.025em;
     }
-    .about h2 em {
-      font-style: normal;
-      color: var(--accent);
-    }
-    .about-text {
-      padding-top: 0.5rem;
-    }
+    .about h2 em { font-style: normal; color: var(--accent); }
     .about-text p {
       font-size: 1rem;
       font-weight: 300;
@@ -313,10 +310,7 @@
       margin-bottom: 1.25rem;
       line-height: 1.75;
     }
-    .about-text p strong {
-      color: var(--text);
-      font-weight: 500;
-    }
+    .about-text p strong { color: var(--text); font-weight: 500; }
     .about-stat {
       display: flex;
       gap: 3rem;
@@ -331,11 +325,7 @@
       color: var(--accent);
       line-height: 1;
     }
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--muted);
-      margin-top: 0.25rem;
-    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
 
     /* SERVICES */
     .services {
@@ -358,12 +348,7 @@
       line-height: 1.05;
       letter-spacing: -0.025em;
     }
-    .services-intro {
-      font-size: 1rem;
-      font-weight: 300;
-      color: #a8a49e;
-      line-height: 1.75;
-    }
+    .services-intro { font-size: 1rem; font-weight: 300; color: #a8a49e; line-height: 1.75; }
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -405,17 +390,10 @@
       letter-spacing: -0.02em;
       margin-bottom: 0.75rem;
     }
-    .service-card p {
-      font-size: 0.9rem;
-      font-weight: 300;
-      color: #a8a49e;
-      line-height: 1.7;
-    }
+    .service-card p { font-size: 0.9rem; font-weight: 300; color: #a8a49e; line-height: 1.7; }
 
     /* HOW */
-    .how {
-      padding: 7rem 0;
-    }
+    .how { padding: 7rem 0; }
     .how h2 {
       font-family: var(--ff-head);
       font-size: clamp(2rem, 4vw, 3rem);
@@ -423,17 +401,8 @@
       letter-spacing: -0.025em;
       margin-bottom: 4rem;
     }
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-    }
-    .step {
-      padding: 2.5rem 2rem 2.5rem 0;
-      border-right: 1px solid var(--border);
-      padding-right: 2rem;
-      padding-left: 0;
-    }
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .step { padding: 2.5rem 2rem 2.5rem 0; border-right: 1px solid var(--border); }
     .step:last-child { border-right: none; padding-right: 0; padding-left: 2rem; }
     .step:not(:first-child) { padding-left: 2rem; }
     .step-num {
@@ -444,19 +413,8 @@
       line-height: 1;
       margin-bottom: 1.5rem;
     }
-    .step h3 {
-      font-family: var(--ff-head);
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.01em;
-    }
-    .step p {
-      font-size: 0.875rem;
-      font-weight: 300;
-      color: #a8a49e;
-      line-height: 1.7;
-    }
+    .step h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .step p { font-size: 0.875rem; font-weight: 300; color: #a8a49e; line-height: 1.7; }
 
     /* WHO */
     .who {
@@ -465,12 +423,7 @@
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
-    .who-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
+    .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
     .who h2 {
       font-family: var(--ff-head);
       font-size: clamp(2rem, 4vw, 3rem);
@@ -480,19 +433,8 @@
       margin-bottom: 1.5rem;
     }
     .who h2 em { font-style: normal; color: var(--accent); }
-    .who p {
-      font-size: 1rem;
-      font-weight: 300;
-      color: #a8a49e;
-      line-height: 1.75;
-      margin-bottom: 1rem;
-    }
-    .who-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+    .who p { font-size: 1rem; font-weight: 300; color: #a8a49e; line-height: 1.75; margin-bottom: 1rem; }
+    .who-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
     .who-list li {
       display: flex;
       align-items: flex-start;
@@ -502,21 +444,10 @@
       color: #a8a49e;
       line-height: 1.6;
     }
-    .who-list li::before {
-      content: '→';
-      color: var(--accent);
-      flex-shrink: 0;
-      font-weight: 600;
-      margin-top: 0.05em;
-    }
+    .who-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-weight: 600; }
 
     /* CTA */
-    .cta-section {
-      padding: 8rem 0;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
+    .cta-section { padding: 8rem 0; text-align: center; position: relative; overflow: hidden; }
     .cta-glow {
       position: absolute;
       bottom: -30%;
@@ -564,18 +495,9 @@
       justify-content: space-between;
       align-items: center;
     }
-    .footer-logo {
-      font-family: var(--ff-head);
-      font-weight: 800;
-      font-size: 0.95rem;
-      letter-spacing: -0.02em;
-      color: var(--muted);
-    }
+    .footer-logo { font-family: var(--ff-head); font-weight: 800; font-size: 0.95rem; color: var(--muted); }
     .footer-logo span { color: var(--accent); }
-    footer p {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
+    footer p { font-size: 0.8rem; color: var(--muted); }
 
     /* ANIMATIONS */
     @keyframes fadeUp {
@@ -590,67 +512,72 @@
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
     }
-
     .reveal {
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
+      html, body { overflow-x: hidden; max-width: 100%; }
+
       nav { padding: 1rem 1.25rem; }
+      .nav-cta { display: none; }
+
       .hero { padding: 7rem 1.25rem 4rem; }
-      .container { padding: 0 1.25rem; }
-      .about-grid,
-      .services-head,
-      .who-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero h1 { font-size: clamp(2.6rem, 13vw, 4rem); max-width: 100%; }
+      .hero-sub { font-size: 1rem; max-width: 100%; }
+      .hero-scroll { display: none; }
+
+      .container { padding: 0 1.25rem; width: 100%; }
+
+      .about-grid, .services-head, .who-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+      .about h2 { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+
+      .about-stat {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+      .stat-num { font-size: 1.8rem; }
+
       .services-grid { grid-template-columns: 1fr; }
-      .steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+      .services h2, .how h2, .who h2, .cta-section h2 {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+      }
+
+      .cta-section h2 { font-size: clamp(2rem, 10vw, 3rem); }
+
+      .steps { grid-template-columns: 1fr; gap: 0; }
       .step, .step:last-child, .step:not(:first-child) {
         border-right: none;
         padding: 1.5rem 0;
         border-bottom: 1px solid var(--border);
       }
+
       .about, .services, .how, .who, .cta-section { padding: 4rem 0; }
+
       footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+
+      .cta-email { font-size: 0.9rem; word-break: break-all; }
     }
   </style>
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "Data House",
-      "image": "https://data-house.eu/datahouse_logo.png",
-      "@id": "https://data-house.eu",
-      "url": "https://data-house.eu",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "SK"
-      },
-      "knowsAbout": [
-        "Data Analytics",
-        "Power BI",
-        "Business Intelligence",
-        "E-commerce Analytics",
-        "Process Automation"
-      ],
-      "sameAs": [
-        "https://www.linkedin.com/in/tadeasgalbavy"
-      ]
-    }
-  </script>
 </head>
 <body>
 
   <nav id="navbar">
     <a href="#" class="nav-logo">Data<span>House</span></a>
-    <a href="#kontakt" class="nav-cta">Napíšte nám</a>
+    <div class="nav-right">
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('sk')" id="btn-sk">SK</button>
+        <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+      </div>
+      <a href="#kontakt" class="nav-cta" id="nav-cta-link">Napíšte nám</a>
+    </div>
   </nav>
 
   <!-- HERO -->
@@ -658,12 +585,12 @@
     <div class="hero-grid-bg"></div>
     <div class="hero-glow"></div>
     <div class="container" style="position:relative;z-index:1;">
-      <p class="hero-label">Dátové poradenstvo - SK / CZ</p>
-      <h1>Zbavíme vás <em>práce s dátami.</em></h1>
-      <p class="hero-sub">Automatizácia reportov, čistenie dát, prehľad nad biznisom - postaráme sa o to, aby ste sa mohli venovať tomu, čo je skutočne dôležité.</p>
+      <p class="hero-label" id="hero-label">Dátové poradenstvo — SK / CZ</p>
+      <h1 id="hero-h1">Zbavíme vás <em>práce s dátami.</em></h1>
+      <p class="hero-sub" id="hero-sub">Automatizácia reportov, čistenie dát, prehľad nad biznisom — postaráme sa o to, aby ste sa mohli venovať tomu, čo je skutočne dôležité.</p>
       <div class="hero-actions">
-        <a href="#kontakt" class="btn-primary">Nezáväzná konzultácia</a>
-        <a href="#sluzby" class="btn-ghost">Čo robíme</a>
+        <a href="#kontakt" class="btn-primary" id="hero-btn-primary">Nezáväzná konzultácia</a>
+        <a href="#sluzby" class="btn-ghost" id="hero-btn-ghost">Čo robíme</a>
       </div>
     </div>
     <div class="hero-scroll">Scroll</div>
@@ -692,27 +619,27 @@
     <div class="container">
       <div class="about-grid reveal">
         <div>
-          <p class="section-label">O nás</p>
-          <h2>Senior konzultant. <em>Žiadna agentúrna rétorika.</em></h2>
+          <p class="section-label" id="about-label">O nás</p>
+          <h2 id="about-h2">Senior konzultant. <em>Žiadna agentúrna rétorika.</em></h2>
           <div class="about-stat">
             <div class="stat-item">
               <div class="stat-num">8+</div>
-              <div class="stat-label">rokov v e-commerce</div>
+              <div class="stat-label" id="stat1">rokov v e-commerce</div>
             </div>
             <div class="stat-item">
               <div class="stat-num">6</div>
-              <div class="stat-label">krajín operácií</div>
+              <div class="stat-label" id="stat2">krajín operácií</div>
             </div>
             <div class="stat-item">
               <div class="stat-num">SK/CZ</div>
-              <div class="stat-label">trh</div>
+              <div class="stat-label" id="stat3">trh</div>
             </div>
           </div>
         </div>
         <div class="about-text">
-          <p>Data House vedie <strong>Tadeáš Galbavy</strong>, senior dátový konzultant s viac ako 8 rokmi skúseností v e-commerce a logistike naprieč 6 krajinami.</p>
-          <p>Nie sme veľká agentúra s juniormi, ktorí sa učia na vašom projekte. <strong>Na každom projekte pracujem osobne</strong> - od prvého hovoru až po finálne riešenie.</p>
-          <p>Špecializujeme sa na firmy, kde dáta existujú, ale nie sú využité. Poznáme tento problém zvnútra - a vieme ho vyriešiť rýchlo a bez zbytočnej teórie.</p>
+          <p id="about-p1">Data House vedie <strong>Tadeáš Galbavy</strong>, senior dátový konzultant s viac ako 8 rokmi skúseností v e-commerce a logistike naprieč 6 krajinami.</p>
+          <p id="about-p2">Nie sme veľká agentúra s juniormi, ktorí sa učia na vašom projekte. <strong>Na každom projekte pracujem osobne</strong> — od prvého hovoru až po finálne riešenie.</p>
+          <p id="about-p3">Špecializujeme sa na firmy, kde dáta existujú, ale nie sú využité. Poznáme tento problém zvnútra — a vieme ho vyriešiť rýchlo a bez zbytočnej teórie.</p>
         </div>
       </div>
     </div>
@@ -723,41 +650,41 @@
     <div class="container">
       <div class="services-head reveal">
         <div>
-          <p class="section-label">Služby</p>
-          <h2>Čo pre vás spravíme</h2>
+          <p class="section-label" id="services-label">Služby</p>
+          <h2 id="services-h2">Čo pre vás spravíme</h2>
         </div>
-        <p class="services-intro">Každý projekt začína auditom aktuálneho stavu. Nenavrhujeme riešenia naslepo - najprv pochopíme váš biznis.</p>
+        <p class="services-intro" id="services-intro">Každý projekt začína auditom aktuálneho stavu. Nenavrhujeme riešenia naslepo — najprv pochopíme váš biznis.</p>
       </div>
       <div class="services-grid reveal">
         <div class="service-card">
           <p class="service-num">01</p>
-          <h3>Audit & zdravie dát</h3>
-          <p>Pozrieme sa na vaše dáta a povieme vám pravdu - kde sú chyby, kde sú medzery a kde unikajú peniaze.</p>
+          <h3 id="s1-title">Audit & zdravie dát</h3>
+          <p id="s1-desc">Pozrieme sa na vaše dáta a povieme vám pravdu — kde sú chyby, kde sú medzery a kde unikajú peniaze. Bez prikrášľovania.</p>
         </div>
         <div class="service-card">
           <p class="service-num">02</p>
-          <h3>Automatizácia reportov</h3>
-          <p>Manuálne reporty v Exceli každý pondelok ráno? To sa dá vyriešiť. Nastavíme automatický tok dát - vy len otvoríte dashboard.</p>
+          <h3 id="s2-title">Automatizácia reportov</h3>
+          <p id="s2-desc">Manuálne reporty v Exceli každý pondelok ráno? To sa dá vyriešiť. Nastavíme automatický tok dát — vy len otvoríte dashboard.</p>
         </div>
         <div class="service-card">
           <p class="service-num">03</p>
-          <h3>Power BI dashboardy</h3>
-          <p>Prehľad nad biznisom v reálnom čase. Marže, skladové pohyby, výkonnosť kanálov - všetko na jednom mieste.</p>
+          <h3 id="s3-title">Power BI dashboardy</h3>
+          <p id="s3-desc">Prehľad nad biznisom v reálnom čase. Marže, skladové pohyby, výkonnosť kanálov — všetko na jednom mieste.</p>
         </div>
         <div class="service-card">
           <p class="service-num">04</p>
-          <h3>Dátové pipelines & ETL</h3>
-          <p>Spájame dáta z rôznych zdrojov - e-shop, ERP, sklad, reklamy. Čisté dáta na jednom mieste, pripravené na analýzu.</p>
+          <h3 id="s4-title">Dátové pipelines & ETL</h3>
+          <p id="s4-desc">Spájame dáta z rôznych zdrojov — e-shop, ERP, sklad, reklamy. Čisté dáta na jednom mieste, pripravené na analýzu.</p>
         </div>
         <div class="service-card">
           <p class="service-num">05</p>
-          <h3>Procesná automatizácia</h3>
-          <p>Identifikujeme manuálnu prácu vo vašich procesoch a nahradíme ju. Python, Power Automate, API integrácie - čo situácia vyžaduje.</p>
+          <h3 id="s5-title">Procesná automatizácia</h3>
+          <p id="s5-desc">Identifikujeme manuálnu prácu vo vašich procesoch a nahradíme ju. Python, Power Automate, API integrácie — čo situácia vyžaduje.</p>
         </div>
         <div class="service-card">
           <p class="service-num">06</p>
-          <h3>Ad-hoc analýzy</h3>
-          <p>Potrebujete rýchlu odpoveď na konkrétnu otázku? Dodáme analýzu s jasným záverom - nie tabuľku s číslami, ale rozhodnutie.</p>
+          <h3 id="s6-title">Ad-hoc analýzy</h3>
+          <p id="s6-desc">Potrebujete rýchlu odpoveď na konkrétnu otázku? Dodáme analýzu s jasným záverom — nie tabuľku s číslami, ale rozhodnutie.</p>
         </div>
       </div>
     </div>
@@ -766,28 +693,28 @@
   <!-- HOW -->
   <section class="how">
     <div class="container">
-      <p class="section-label reveal">Ako pracujeme</p>
-      <h2 class="reveal">Jednoduchý proces.<br>Žiadne prekvapenia.</h2>
+      <p class="section-label reveal" id="how-label">Ako pracujeme</p>
+      <h2 class="reveal" id="how-h2">Jednoduchý proces.<br>Žiadne prekvapenia.</h2>
       <div class="steps reveal">
         <div class="step">
           <div class="step-num">01</div>
-          <h3>Úvodný hovor</h3>
-          <p>30 minút zdarma. Pochopíme váš problém a zistíme, či sme pre vás správna voľba.</p>
+          <h3 id="step1-title">Úvodný hovor</h3>
+          <p id="step1-desc">30 minút zdarma. Pochopíme váš problém a zistíme, či sme pre vás správna voľba.</p>
         </div>
         <div class="step">
           <div class="step-num">02</div>
-          <h3>Audit situácie</h3>
-          <p>Pozrieme sa na aktuálny stav dát a procesov. Dostanete konkrétny obraz - nie všeobecné odporúčania.</p>
+          <h3 id="step2-title">Audit situácie</h3>
+          <p id="step2-desc">Pozrieme sa na aktuálny stav dát a procesov. Dostanete konkrétny obraz — nie všeobecné odporúčania.</p>
         </div>
         <div class="step">
           <div class="step-num">03</div>
-          <h3>Návrh & realizácia</h3>
-          <p>Navrhneme riešenie, odsúhlasíme rozsah a spravíme ho. Bez zbytočných meetingov a prezentácií.</p>
+          <h3 id="step3-title">Návrh & realizácia</h3>
+          <p id="step3-desc">Navrhneme riešenie, odsúhlasíme rozsah a spravíme ho. Bez zbytočných meetingov a prezentácií.</p>
         </div>
         <div class="step">
           <div class="step-num">04</div>
-          <h3>Odovzdanie & podpora</h3>
-          <p>Odovzdáme riešenie s dokumentáciou. Váš tím ho dokáže udržiavať sám - to je náš cieľ.</p>
+          <h3 id="step4-title">Odovzdanie & podpora</h3>
+          <p id="step4-desc">Odovzdáme riešenie s dokumentáciou. Váš tím ho dokáže udržiavať sám — to je náš cieľ.</p>
         </div>
       </div>
     </div>
@@ -798,13 +725,13 @@
     <div class="container">
       <div class="who-grid reveal">
         <div>
-          <p class="section-label">Pre koho</p>
-          <h2>Rastúce firmy, ktoré <em>prestávajú zvládať dáta ručne.</em></h2>
-          <p>Pracujeme predovšetkým s e-commerce a logistickými firmami na SK/CZ trhu, kde sú dáta roztrúsené a reportovanie stojí príliš veľa času.</p>
+          <p class="section-label" id="who-label">Pre koho</p>
+          <h2 id="who-h2">Rastúce firmy, ktoré <em>prestávajú zvládať dáta ručne.</em></h2>
+          <p id="who-p">Pracujeme predovšetkým s e-commerce a logistickými firmami na SK/CZ trhu, kde sú dáta roztrúsené a reportovanie stojí príliš veľa času.</p>
         </div>
-        <ul class="who-list">
+        <ul class="who-list" id="who-list">
           <li>Reporty robíte stále ručne v Exceli a trvá to hodiny</li>
-          <li>Máte dáta v e-shope, ERP aj Exceli - ale nie pohromade</li>
+          <li>Máte dáta v e-shope, ERP aj Exceli — ale nie pohromade</li>
           <li>Neviete presne ktoré produkty zarábajú a ktoré nie</li>
           <li>Chceli by ste dashboard, ale nemáte na to interné kapacity</li>
           <li>Rastie vám firma a doterajší spôsob práce s dátami prestáva stačiť</li>
@@ -817,17 +744,17 @@
   <section class="cta-section" id="kontakt">
     <div class="cta-glow"></div>
     <div class="container" style="position:relative;z-index:1;">
-      <p class="section-label reveal">Kontakt</p>
-      <h2 class="reveal">Začnime <em>rozhovorom.</em></h2>
-      <p class="reveal">Napíšte nám čo riešite - odpovieme do 24 hodín a dohodneme bezplatný úvodný hovor.</p>
-      <a href="mailto:tadeas@data-house.eu" class="cta-email reveal">tadeas@data-house.eu</a>
+      <p class="section-label reveal" id="cta-label">Kontakt</p>
+      <h2 class="reveal" id="cta-h2">Začnime <em>rozhovorom.</em></h2>
+      <p class="reveal" id="cta-p">Napíšte nám čo riešite — odpovieme do 24 hodín a dohodneme bezplatný úvodný hovor.</p>
+      <a href="mailto:hello@data-house.eu" class="cta-email reveal">hello@data-house.eu</a>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">Data<span>House</span></div>
-    <p>© 2025 Data House · data-house.eu</p>
+    <p id="footer-copy">© 2025 Data House · data-house.eu</p>
   </footer>
 
   <script>
@@ -841,13 +768,150 @@
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
       });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
+
+    // Translations
+    const translations = {
+      sk: {
+        'nav-cta-link': 'Napíšte nám',
+        'hero-label': 'Dátové poradenstvo — SK / CZ',
+        'hero-h1': 'Zbavíme vás <em>práce s dátami.</em>',
+        'hero-sub': 'Automatizácia reportov, čistenie dát, prehľad nad biznisom — postaráme sa o to, aby ste sa mohli venovať tomu, čo je skutočne dôležité.',
+        'hero-btn-primary': 'Nezáväzná konzultácia',
+        'hero-btn-ghost': 'Čo robíme',
+        'about-label': 'O nás',
+        'about-h2': 'Senior konzultant. <em>Žiadna agentúrna rétorika.</em>',
+        'stat1': 'rokov v e-commerce',
+        'stat2': 'krajín operácií',
+        'stat3': 'trh',
+        'about-p1': 'Data House vedie <strong>Tadeáš Galbavy</strong>, senior dátový konzultant s viac ako 8 rokmi skúseností v e-commerce a logistike naprieč 6 krajinami.',
+        'about-p2': 'Nie sme veľká agentúra s juniormi, ktorí sa učia na vašom projekte. <strong>Na každom projekte pracujem osobne</strong> — od prvého hovoru až po finálne riešenie.',
+        'about-p3': 'Špecializujeme sa na firmy, kde dáta existujú, ale nie sú využité. Poznáme tento problém zvnútra — a vieme ho vyriešiť rýchlo a bez zbytočnej teórie.',
+        'services-label': 'Služby',
+        'services-h2': 'Čo pre vás spravíme',
+        'services-intro': 'Každý projekt začína auditom aktuálneho stavu. Nenavrhujeme riešenia naslepo — najprv pochopíme váš biznis.',
+        's1-title': 'Audit & zdravie dát',
+        's1-desc': 'Pozrieme sa na vaše dáta a povieme vám pravdu — kde sú chyby, kde sú medzery a kde unikajú peniaze. Bez prikrášľovania.',
+        's2-title': 'Automatizácia reportov',
+        's2-desc': 'Manuálne reporty v Exceli každý pondelok ráno? To sa dá vyriešiť. Nastavíme automatický tok dát — vy len otvoríte dashboard.',
+        's3-title': 'Power BI dashboardy',
+        's3-desc': 'Prehľad nad biznisom v reálnom čase. Marže, skladové pohyby, výkonnosť kanálov — všetko na jednom mieste.',
+        's4-title': 'Dátové pipelines & ETL',
+        's4-desc': 'Spájame dáta z rôznych zdrojov — e-shop, ERP, sklad, reklamy. Čisté dáta na jednom mieste, pripravené na analýzu.',
+        's5-title': 'Procesná automatizácia',
+        's5-desc': 'Identifikujeme manuálnu prácu vo vašich procesoch a nahradíme ju. Python, Power Automate, API integrácie — čo situácia vyžaduje.',
+        's6-title': 'Ad-hoc analýzy',
+        's6-desc': 'Potrebujete rýchlu odpoveď na konkrétnu otázku? Dodáme analýzu s jasným záverom — nie tabuľku s číslami, ale rozhodnutie.',
+        'how-label': 'Ako pracujeme',
+        'how-h2': 'Jednoduchý proces.<br>Žiadne prekvapenia.',
+        'step1-title': 'Úvodný hovor',
+        'step1-desc': '30 minút zdarma. Pochopíme váš problém a zistíme, či sme pre vás správna voľba.',
+        'step2-title': 'Audit situácie',
+        'step2-desc': 'Pozrieme sa na aktuálny stav dát a procesov. Dostanete konkrétny obraz — nie všeobecné odporúčania.',
+        'step3-title': 'Návrh & realizácia',
+        'step3-desc': 'Navrhneme riešenie, odsúhlasíme rozsah a spravíme ho. Bez zbytočných meetingov a prezentácií.',
+        'step4-title': 'Odovzdanie & podpora',
+        'step4-desc': 'Odovzdáme riešenie s dokumentáciou. Váš tím ho dokáže udržiavať sám — to je náš cieľ.',
+        'who-label': 'Pre koho',
+        'who-h2': 'Rastúce firmy, ktoré <em>prestávajú zvládať dáta ručne.</em>',
+        'who-p': 'Pracujeme predovšetkým s e-commerce a logistickými firmami na SK/CZ trhu, kde sú dáta roztrúsené a reportovanie stojí príliš veľa času.',
+        'who-list': [
+          'Reporty robíte stále ručne v Exceli a trvá to hodiny',
+          'Máte dáta v e-shope, ERP aj Exceli — ale nie pohromade',
+          'Neviete presne ktoré produkty zarábajú a ktoré nie',
+          'Chceli by ste dashboard, ale nemáte na to interné kapacity',
+          'Rastie vám firma a doterajší spôsob práce s dátami prestáva stačiť'
+        ],
+        'cta-label': 'Kontakt',
+        'cta-h2': 'Začnime <em>rozhovorom.</em>',
+        'cta-p': 'Napíšte nám čo riešite — odpovieme do 24 hodín a dohodneme bezplatný úvodný hovor.',
+        'footer-copy': '© 2025 Data House · data-house.eu'
+      },
+      en: {
+        'nav-cta-link': 'Get in touch',
+        'hero-label': 'Data Consulting — Central Europe',
+        'hero-h1': 'We take the hard work <em>out of your data.</em>',
+        'hero-sub': 'Automated reporting, data quality, business intelligence — we handle the data so you can focus on what actually matters.',
+        'hero-btn-primary': 'Free consultation',
+        'hero-btn-ghost': 'What we do',
+        'about-label': 'About',
+        'about-h2': 'Senior consultant. <em>No agency fluff.</em>',
+        'stat1': 'years in e-commerce',
+        'stat2': 'countries of operations',
+        'stat3': 'market',
+        'about-p1': 'Data House is led by <strong>Tadeáš Galbavy</strong>, a senior data consultant with 8+ years of hands-on experience in e-commerce and logistics across 6 countries.',
+        'about-p2': 'We are not a large agency where juniors learn on your project. <strong>I work on every project personally</strong> — from the first call to the final delivery.',
+        'about-p3': 'We specialize in companies where data exists but is not being used. We know this problem from the inside — and we know how to fix it quickly, without unnecessary theory.',
+        'services-label': 'Services',
+        'services-h2': 'What we can do for you',
+        'services-intro': 'Every engagement starts with an audit of your current state. We never propose solutions blindly — we understand your business first.',
+        's1-title': 'Data audit & quality',
+        's1-desc': 'We look at your data and tell you the truth — where the errors are, where the gaps are, and where money is leaking. No sugarcoating.',
+        's2-title': 'Report automation',
+        's2-desc': 'Manual Excel reports every Monday morning? That can be fixed. We set up automated data flows — you just open the dashboard.',
+        's3-title': 'Power BI dashboards',
+        's3-desc': 'Real-time business overview. Margins, inventory movements, channel performance — everything in one place.',
+        's4-title': 'Data pipelines & ETL',
+        's4-desc': 'We connect data from multiple sources — e-shop, ERP, warehouse, ads. Clean data in one place, ready for analysis.',
+        's5-title': 'Process automation',
+        's5-desc': 'We identify manual work in your processes and replace it. Python, Power Automate, API integrations — whatever the situation requires.',
+        's6-title': 'Ad-hoc analysis',
+        's6-desc': 'Need a quick answer to a specific question? We deliver analysis with a clear conclusion — not a table of numbers, but a decision.',
+        'how-label': 'How we work',
+        'how-h2': 'Simple process.<br>No surprises.',
+        'step1-title': 'Intro call',
+        'step1-desc': '30 minutes, free of charge. We understand your problem and find out if we are the right fit.',
+        'step2-title': 'Situation audit',
+        'step2-desc': 'We look at the current state of your data and processes. You get a clear picture — not generic recommendations.',
+        'step3-title': 'Design & delivery',
+        'step3-desc': 'We propose a solution, agree on scope and get it done. No unnecessary meetings or slide decks.',
+        'step4-title': 'Handover & support',
+        'step4-desc': 'We hand over the solution with documentation. Your team can maintain it independently — that is our goal.',
+        'who-label': 'Who we work with',
+        'who-h2': 'Growing companies that <em>can no longer manage data manually.</em>',
+        'who-p': 'We primarily work with e-commerce and logistics companies in Central Europe where data is scattered and reporting takes too much time.',
+        'who-list': [
+          'You still build reports manually in Excel and it takes hours',
+          'Your data lives in the e-shop, ERP and Excel — but never together',
+          'You do not know exactly which products make money and which do not',
+          'You want a dashboard but do not have the internal capacity to build one',
+          'Your business is growing and your current approach to data is no longer enough'
+        ],
+        'cta-label': 'Contact',
+        'cta-h2': 'Let\'s start <em>with a conversation.</em>',
+        'cta-p': 'Tell us what you are dealing with — we respond within 24 hours and schedule a free intro call.',
+        'footer-copy': '© 2025 Data House · data-house.eu'
+      }
+    };
+
+    function setLang(lang) {
+      const t = translations[lang];
+
+      // Prepínač
+      document.getElementById('btn-sk').classList.toggle('active', lang === 'sk');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.documentElement.lang = lang;
+
+      // Všetky jednoduché texty
+      const simpleKeys = Object.keys(t).filter(k => k !== 'who-list');
+      simpleKeys.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = t[id];
+      });
+
+      // Zoznam who-list
+      const list = document.getElementById('who-list');
+      if (list) {
+        list.innerHTML = t['who-list'].map(item => `<li>${item}</li>`).join('');
+      }
+
+      // Anchor pre kontakt sekciu
+      document.getElementById('nav-cta-link').href = '#kontakt';
+      document.querySelectorAll('a[href="#sluzby"]').forEach(a => a.href = '#sluzby');
+    }
   </script>
 </body>
 </html>
