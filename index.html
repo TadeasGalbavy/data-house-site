@@ -540,6 +540,21 @@
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* FLOATING BUTTON */
+    .fab-switch {
+      position: fixed;
+      bottom: 2rem;
+      right: 1.5rem;
+      z-index: 200;
+      background: var(--mkt);
+      color: #000;
+      padding: 0.75rem 1.25rem;
+      border-radius: 2rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       html, body { overflow-x: hidden; max-width: 100%; }
@@ -622,7 +637,6 @@
         <button class="lang-btn active" onclick="setLang('sk')" id="btn-sk">SK</button>
         <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
       </div>
-      <a href="index_mkt.html" class="nav-cta-mkt">Marketing</a>
       <a href="#kontakt" class="nav-cta" id="nav-cta-link">Napíšte nám</a>
     </div>
   </nav>
@@ -960,5 +974,6 @@
       document.querySelectorAll('a[href="#sluzby"]').forEach(a => a.href = '#sluzby');
     }
   </script>
+  <a href="index_mkt.html" class="fab-switch">Marketing</a>
 </body>
 </html>
