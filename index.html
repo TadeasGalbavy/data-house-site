@@ -548,11 +548,22 @@
       nav { padding: 1rem 1.25rem; }
       .nav-cta { display: none; }
 
-      .nav-right {
+      nav {
         flex-wrap: wrap;
-        justify-content: flex-end;
+        padding: 1rem 1.25rem;
         gap: 0.5rem;
-        max-width: calc(100% - 120px); /* miesto pre logo */
+      }
+
+      .nav-logo {
+        flex: 1; /* logo zaberá voľný priestor vľavo */
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        /* zruš max-width ak si ho pridal */
+        max-width: unset;
       }
 
       .nav-cta-mkt {
