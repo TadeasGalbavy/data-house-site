@@ -520,21 +520,6 @@
     .footer-logo span { color: var(--accent); }
     footer p { font-size: 0.8rem; color: var(--muted); }
 
-    /* Fade transition */
-    body {
-      transition: opacity 0.3s ease;
-    }
-    body.fade-out {
-      opacity: 0;
-    }
-    body {
-      animation: fadeIn 0.4s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
     /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
@@ -975,15 +960,7 @@
       document.querySelectorAll('a[href="#sluzby"]').forEach(a => a.href = '#sluzby');
     }
 
-    /* Fade-out pri prepnutí jazyka / produktu */
-    document.querySelectorAll('.page-switch').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const href = link.getAttribute('href');
-        document.body.classList.add('fade-out');
-        setTimeout(() => window.location = href, 300);
-      });
-    });
+
   </script>
 </body>
 </html>
