@@ -520,6 +520,21 @@
     .footer-logo span { color: var(--accent); }
     footer p { font-size: 0.8rem; color: var(--muted); }
 
+    /* Fade transition */
+    body {
+      transition: opacity 0.3s ease;
+    }
+    body.fade-out {
+      opacity: 0;
+    }
+    body {
+      animation: fadeIn 0.4s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
     /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
@@ -587,20 +602,7 @@
       .cta-email { font-size: 0.9rem; word-break: break-all; }
     }
 
-    /* Fade transition */
-    body {
-      transition: opacity 0.3s ease;
-    }
-    body.fade-out {
-      opacity: 0;
-    }
-    body {
-      animation: fadeIn 0.4s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
+    
   </style>
   <script type="application/ld+json">
     {
