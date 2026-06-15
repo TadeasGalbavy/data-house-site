@@ -1,0 +1,12 @@
+# Codex
+.codex/
+.codex*
+.agents/
+.agents*
+
+# Python
+__pycache__/
+.venv/
+
+# VS Code
+.vscode/
