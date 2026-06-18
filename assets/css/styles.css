@@ -416,6 +416,77 @@
     .step h3 { font-family: var(--ff-head); font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem; }
     .step p { font-size: 0.875rem; font-weight: 300; color: #a8a49e; line-height: 1.7; }
 
+    /* SOLUTIONS */
+    .solutions { padding: 7rem 0; }
+    .solutions-head {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 3rem;
+      align-items: center;
+    }
+    .solutions h2 {
+      font-family: var(--ff-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+    }
+    .solutions h2 em { font-style: normal; color: var(--accent); }
+    .solutions-intro {
+      font-size: 1rem;
+      font-weight: 300;
+      color: #a8a49e;
+      line-height: 1.75;
+    }
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .solution-card {
+      background: var(--bg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .solution-card h3 {
+      font-family: var(--ff-head);
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    .solution-item span {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+    .solution-item p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: #a8a49e;
+      line-height: 1.65;
+    }
+    .solution-link {
+      margin-top: auto;
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(200,240,96,0.3);
+      width: fit-content;
+      padding-bottom: 2px;
+    }
+    .solution-link:hover { border-color: var(--accent); }
+
     /* WHO */
     .who {
       padding: 7rem 0;
@@ -548,7 +619,7 @@
 
       .container { padding: 0 1.25rem; width: 100%; }
 
-      .about-grid, .services-head, .who-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-grid, .services-head, .solutions-head, .who-grid { grid-template-columns: 1fr; gap: 2rem; }
 
       .about h2 { font-size: clamp(1.8rem, 8vw, 2.5rem); }
 
@@ -559,9 +630,9 @@
       }
       .stat-num { font-size: 1.8rem; }
 
-      .services-grid { grid-template-columns: 1fr; }
+      .services-grid, .solutions-grid { grid-template-columns: 1fr; }
 
-      .services h2, .how h2, .who h2, .cta-section h2 {
+      .services h2, .how h2, .solutions h2, .who h2, .cta-section h2 {
         font-size: clamp(1.8rem, 8vw, 2.5rem);
       }
 
@@ -574,7 +645,7 @@
         border-bottom: 1px solid var(--border);
       }
 
-      .about, .services, .how, .who, .cta-section { padding: 4rem 0; }
+      .about, .services, .how, .solutions, .who, .cta-section { padding: 4rem 0; }
 
       footer { flex-direction: column; gap: 0.75rem; text-align: center; }
 
