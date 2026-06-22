@@ -401,6 +401,9 @@
       letter-spacing: -0.025em;
       margin-bottom: 4rem;
     }
+
+    .how h2 em { font-style: normal; color: var(--accent); }
+
     .steps { display: grid; grid-template-columns: repeat(4, 1fr); }
     .step { padding: 2.5rem 2rem 2.5rem 0; border-right: 1px solid var(--border); }
     .step:last-child { border-right: none; padding-right: 0; padding-left: 2rem; }
