@@ -339,7 +339,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
       margin-bottom: 4rem;
-      align-items: end;
+      align-items: center;
     }
     .services h2 {
       font-family: var(--ff-head);
